@@ -2,6 +2,9 @@
 import { useState } from "react";
 import "./UploadNotes.css";
 
+// Render Backend URL
+const API_URL = "https://notegraph-ai-backend.onrender.com";
+
 // Ready-made Sample Notes for Project Demo
 const sampleNotes = {
   "Artificial Intelligence": `Artificial Intelligence (AI) is a branch of computer science that focuses on creating intelligent machines.
@@ -136,13 +139,10 @@ function UploadNotes({ onViewGraph }) {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:5001/upload-pdf",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`${API_URL}/upload-pdf`, {
+        method: "POST",
+        body: formData,
+      });
 
       const data = await response.json();
 
@@ -154,7 +154,7 @@ function UploadNotes({ onViewGraph }) {
       }
     } catch (error) {
       console.error(error);
-      alert("Backend se connection nahi ho raha. Flask server check karo.");
+      alert("Backend se connection nahi ho raha. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -175,16 +175,13 @@ function UploadNotes({ onViewGraph }) {
     resetChat();
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:5001/recommend",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ notes }),
-        }
-      );
+      const response = await fetch(`${API_URL}/recommend`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ notes }),
+      });
 
       const data = await response.json();
 
@@ -195,7 +192,7 @@ function UploadNotes({ onViewGraph }) {
       }
     } catch (error) {
       console.error(error);
-      alert("Backend se connection nahi ho raha. Flask server check karo.");
+      alert("Backend se connection nahi ho raha. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -212,16 +209,13 @@ function UploadNotes({ onViewGraph }) {
     resetQuiz();
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:5001/quiz",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ notes }),
-        }
-      );
+      const response = await fetch(`${API_URL}/quiz`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ notes }),
+      });
 
       const data = await response.json();
 
@@ -266,16 +260,13 @@ function UploadNotes({ onViewGraph }) {
     resetFlashcards();
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:5001/flashcards",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ notes }),
-        }
-      );
+      const response = await fetch(`${API_URL}/flashcards`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ notes }),
+      });
 
       const data = await response.json();
 
@@ -336,19 +327,16 @@ function UploadNotes({ onViewGraph }) {
     setChatLoading(true);
 
     try {
-      const response = await fetch(
-        "http://127.0.0.1:5001/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            question: question,
-            notes: notes,
-          }),
-        }
-      );
+      const response = await fetch(`${API_URL}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          question: question,
+          notes: notes,
+        }),
+      });
 
       const data = await response.json();
 
@@ -1118,3 +1106,4 @@ function UploadNotes({ onViewGraph }) {
 }
 
 export default UploadNotes;
+
