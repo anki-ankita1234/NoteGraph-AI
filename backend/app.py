@@ -838,15 +838,16 @@ Answer:
             "answer": answer
         })
 
-    except Exception:
+    except Exception as e:
 
         app.logger.exception("Gemini API error")
 
         return jsonify({
             "success": False,
-            "message": "Gemini could not answer. Check API key, internet and model access."
+            "message": "Gemini API Error",
+            "error_type": type(e).__name__,
+            "error_details": str(e)
         }), 502
-
 
 # ==========================================
 # START SERVER
