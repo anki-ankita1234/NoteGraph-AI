@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 import Home from "./pages/home";
-import UploadNotes from "./pages/uploadNotes";
+import UploadNotes from "./pages/uploadnotes";
 import GraphPage from "./pages/graphpage";
 import History from "./pages/history";
 
