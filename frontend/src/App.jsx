@@ -1,8 +1,8 @@
 
 import { useState } from "react";
 
-import Home from "./pages/Home";
-import UploadNotes from "./pages/UploadNotes";
+import Home from "./pages/home";
+import UploadNotes from "./pages/uploadNotes";
 import GraphPage from "./pages/graphpage";
 import History from "./pages/history";
 
